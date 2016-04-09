@@ -240,7 +240,7 @@ func (clo *CloudLoggingOutput) Encode(pack *pipeline.PipelinePack) (name string,
 	meta := &logging.LogEntryMetadata{
 		Timestamp:   getTimestamp(*message.Timestamp),
 		Severity:    getSeverity(*message.Severity),
-		ProjectID:   clo.conf.ProjectID,
+		ProjectId:   clo.conf.ProjectID,
 		ServiceName: "compute.googleapis.com",
 		Zone:        clo.conf.Zone,
 		Labels:      labels,
