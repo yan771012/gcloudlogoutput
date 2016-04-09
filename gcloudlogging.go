@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"time"
+	"fmt"
 
 	"github.com/mozilla-services/heka/pipeline"
 	"golang.org/x/oauth2"
@@ -116,7 +117,7 @@ func (clo *CloudLoggingOutput) Run(or pipeline.OutputRunner, h pipeline.PluginHe
 			}
 
 			k, m, e = clo.Encode(pack)
-			pack.Recycle()
+			pack.Recycle(fmt.Errorf("can't encode: %s", e))
 			if e != nil {
 				or.LogError(e)
 				continue
