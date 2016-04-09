@@ -44,7 +44,7 @@ type LogBatch struct {
 
 //ConfigStruct ...
 func (clo *CloudLoggingOutput) ConfigStruct() interface{} {
-	return &CloudLoggingConfig{Zone: "asia-east1-a", ResourceID: "0", LogName: "heka"}
+	return &CloudLoggingConfig{Zone: "asia-east1-a", ResourceID: "0", LogName: "projects/pristine-abacus-90205/logs/syslog"}
 }
 
 //Init ...
