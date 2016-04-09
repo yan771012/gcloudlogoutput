@@ -172,7 +172,9 @@ func (clo *CloudLoggingOutput) SendRecord(name string, entries []*logging.LogEnt
 		"compute.googleapis.com/resource_id":   clo.conf.ResourceID,
 	}
 	e := &logging.WriteLogEntriesRequest{CommonLabels: labels, Entries: entries}
-	log.Print(e.Entries)
+	for i, v := range e.Entries {
+		log.Printf(i, v)
+	}
 	_, err = clo.service.Projects.Logs.Entries.Write(clo.conf.ProjectID, name, e).Do()
 	if err != nil {
 		log.Print("Write Log Error: ", err)
