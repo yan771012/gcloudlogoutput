@@ -49,6 +49,8 @@ func (clo *CloudLoggingOutput) ConfigStruct() interface{} {
 
 //Init ...
 func (clo *CloudLoggingOutput) Init(config interface{}) (err error) {
+	log.Print("Init")
+
 	clo.conf = config.(*CloudLoggingConfig)
 
 	if metadata.OnGCE() {
@@ -162,6 +164,9 @@ func (clo *CloudLoggingOutput) committer() {
 
 //SendRecord ...
 func (clo *CloudLoggingOutput) SendRecord(name string, entries []*logging.LogEntry) (err error) {
+	
+	log.Print("send record: ")
+
 	labels := map[string]string{
 		"compute.googleapis.com/resource_type": "instance",
 		"compute.googleapis.com/resource_id":   clo.conf.ResourceID,
@@ -177,6 +182,7 @@ func (clo *CloudLoggingOutput) SendRecord(name string, entries []*logging.LogEnt
 func (clo *CloudLoggingOutput) sendBatch(name string, entries []*logging.LogEntry, count int64) (nextBatch []*logging.LogEntry) {
 	// This will block until the other side is ready to accept
 	// this batch, so we can't get too far ahead.
+	log.Print("send batch ")
 	b := LogBatch{
 		count: count,
 		batch: entries,
@@ -188,6 +194,7 @@ func (clo *CloudLoggingOutput) sendBatch(name string, entries []*logging.LogEntr
 }
 
 func (clo *CloudLoggingOutput) sendGroupBatch(batch map[string]*LogBatch) {
+	log.Print("sendGroupBatch")
 	for _, b := range batch {
 		if len(b.batch) > 0 {
 			b.batch = clo.sendBatch(b.name, b.batch, b.count)
