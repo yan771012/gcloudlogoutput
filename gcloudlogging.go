@@ -173,7 +173,7 @@ func (clo *CloudLoggingOutput) SendRecord(name string, entries []*logging.LogEnt
 	}
 	e := &logging.WriteLogEntriesRequest{CommonLabels: labels, Entries: entries}
 	for i, v := range e.Entries {
-		log.Printf(v)
+		log.Print(v)
 	}
 	_, err = clo.service.Projects.Logs.Entries.Write(clo.conf.ProjectID, name, e).Do()
 	if err != nil {
