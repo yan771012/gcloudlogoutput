@@ -247,6 +247,10 @@ func (clo *CloudLoggingOutput) Encode(pack *pipeline.PipelinePack) (name string,
 	} else {
 		name = clo.conf.LogName
 	}
+	
+	log.Print("name is: ", name)
+	log.Print("pl: ", message.GetPayload())
+
 
 	meta := &logging.LogEntryMetadata{
 		Timestamp:   getTimestamp(*message.Timestamp),
