@@ -172,9 +172,7 @@ func (clo *CloudLoggingOutput) SendRecord(name string, entries []*logging.LogEnt
 		"compute.googleapis.com/resource_id":   clo.conf.ResourceID,
 	}
 	e := &logging.WriteLogEntriesRequest{CommonLabels: labels, Entries: entries}
-	for i, v := range e.Entries {
-		log.Print(i,v)
-	}
+
 	_, err = clo.service.Projects.Logs.Entries.Write(clo.conf.ProjectID, name, e).Do()
 	if err != nil {
 		log.Print("Write Log Error: ", err)
@@ -260,6 +258,8 @@ func (clo *CloudLoggingOutput) Encode(pack *pipeline.PipelinePack) (name string,
 		Zone:        clo.conf.Zone,
 		Labels:      labels,
 	}
+	log.Print(meta)
+
 	entry = &logging.LogEntry{Metadata: meta, TextPayload: message.GetPayload()}
 	return
 }
