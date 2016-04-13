@@ -245,7 +245,6 @@ func (clo *CloudLoggingOutput) Encode(pack *pipeline.PipelinePack) (name string,
 	} else {
 		name = clo.conf.LogName
 	}
-	name = "/projects/pristine-abacus-90205/logs/hhh"
 	log.Print("name is: ", name)
 	log.Print("pl: ", message.GetPayload())
 
