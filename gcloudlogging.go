@@ -195,7 +195,7 @@ func (clo *CloudLoggingOutput) sendBatch(name string, entries []*logging.LogEntr
 }
 
 func (clo *CloudLoggingOutput) sendGroupBatch(batch map[string]*LogBatch) {
-	log.Print("sendGroupBatch")
+	log.Print("sendingGroupBatch")
 	for _, b := range batch {
 		if len(b.batch) > 0 {
 			b.batch = clo.sendBatch(b.name, b.batch, b.count)
