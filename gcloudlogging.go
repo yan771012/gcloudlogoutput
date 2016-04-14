@@ -263,7 +263,7 @@ func (clo *CloudLoggingOutput) Encode(pack *pipeline.PipelinePack) (name string,
 		if v != nil {
 			fiedlName :=  v.GetName()
 			if str, ok := message.GetFieldValue(fiedlName); ok {
-			   labels[fiedlName] = str
+			   labels[fiedlName] = str.(string)
 			} 		
 		}
 	}
