@@ -240,21 +240,31 @@ func (clo *CloudLoggingOutput) Encode(pack *pipeline.PipelinePack) (name string,
 		labels["compute.googleapis.com/resource_id"] = *message.Hostname
 	}
 
+	if *message.Logger != "" {
+		labels["logger"] = *message.Logger
+	}
+
+	if *message.EnvVersion != "" {
+		labels["envVersion"] = *message.EnvVersion
+	}
+
 	if *message.Type != "" {
 		name = *message.Type
 	} else {
 		name = clo.conf.LogName
 	}
+
+	labelsp["uuid"] = *message.Uuid
+
 	log.Print("name is: ", name)
 	log.Print("pl: ", message.GetPayload())
+
 	for _, v := range message.Fields {
 		if v != nil {
 			log.Print(v.GetName())
 			log.Print(message.GetFieldValue(v.GetName()))
 		}
 	}
-
-
 
 	meta := &logging.LogEntryMetadata{
 		Timestamp:   getTimestamp(*message.Timestamp),
