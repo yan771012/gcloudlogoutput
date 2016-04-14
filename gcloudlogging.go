@@ -247,7 +247,12 @@ func (clo *CloudLoggingOutput) Encode(pack *pipeline.PipelinePack) (name string,
 	}
 	log.Print("name is: ", name)
 	log.Print("pl: ", message.GetPayload())
-	log.Print("Fields: ", len(*message.Fields))
+	for _, v := range message.Fields {
+		if v != nil {
+			log.Print(v.GetName())
+		}
+	}
+
 
 
 	meta := &logging.LogEntryMetadata{
