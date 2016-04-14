@@ -250,6 +250,7 @@ func (clo *CloudLoggingOutput) Encode(pack *pipeline.PipelinePack) (name string,
 	for _, v := range message.Fields {
 		if v != nil {
 			log.Print(v.GetName())
+			log.Print(message.GetFieldValue(v.GetName()))
 		}
 	}
 
