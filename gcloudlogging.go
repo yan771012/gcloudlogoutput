@@ -253,7 +253,7 @@ func (clo *CloudLoggingOutput) Encode(pack *pipeline.PipelinePack) (name string,
 	} else {
 		name = clo.conf.LogName
 	}
-	uuid := string(*message.Uuid)
+	uuid := string(message.Uuid)
 	labels["uuid"] = uuid
 
 	log.Print("name is: ", name)
@@ -261,8 +261,10 @@ func (clo *CloudLoggingOutput) Encode(pack *pipeline.PipelinePack) (name string,
 
 	for _, v := range message.Fields {
 		if v != nil {
-			value, _ := message.GetFieldValue(v.GetName())
-			labels[v.GetName()] = value
+			fiedlName :=  v.GetName()
+			if str, ok := message.GetFieldValue(fiedlName); ok {
+			   labels[fiedlName] = str
+			} 		
 		}
 	}
 
