@@ -240,9 +240,9 @@ func (clo *CloudLoggingOutput) Encode(pack *pipeline.PipelinePack) (name string,
 		labels["compute.googleapis.com/resource_id"] = *message.Hostname
 	}
 
-	// if *message.Logger != "" {
-	// 	labels["logger"] = *message.Logger
-	// }
+	if *message.Logger != "" {
+		labels["logger"] = *message.Logger
+	}
 
 	// if *message.EnvVersion != "" {
 	// 	labels["envVersion"] = *message.EnvVersion
