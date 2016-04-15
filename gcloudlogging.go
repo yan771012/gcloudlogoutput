@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"time"
 	"fmt"
-	"bytes"
 
 	"github.com/mozilla-services/heka/pipeline"
 	"golang.org/x/oauth2"
