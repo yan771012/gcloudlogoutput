@@ -256,8 +256,10 @@ func (clo *CloudLoggingOutput) Encode(pack *pipeline.PipelinePack) (name string,
 	}
 	
 	n := bytes.IndexByte(message.Uuid, 0)
-	uuid := string(message.Uuid[:n])
-	labels["uuid"] = uuid
+	log.Print("uuid n: ", n)
+	log.Print(message.Uuid)
+	// uuid := string(message.Uuid[:n])
+	// labels["uuid"] = uuid
 
 	log.Print("name is: ", name)
 	log.Print("pl: ", message.GetPayload())
